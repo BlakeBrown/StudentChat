@@ -3,19 +3,40 @@
 	<head>
 		<title>Chat</title>
 		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
-		<div class="chat">
-			<input type="text" class="chat-name" placeholder="Enter your name">
+		<form id="enter-chat">
+			<input type="text" class="chat-name form-control" placeholder="Enter your name">
+		</form>
+		<form id="select-class" style="text-align:center">
+			<h1>Select Your Class</h1>
+			<select class="chat-class form-control">
+				<option selected disabled hidden value=''></option>
+				<option>Calculus</option>
+				<option>Physics</option>
+				<option>Pyschology</option>
+				<option>Linear Circuits</option>
+				<option>Programming</option>
+			</select>
+		</form>
+		<div class="chat" style="display:none">
+			<h1 id="chat-header"></h1>
 			<div class="chat-messages">
 
 			</div>
 			<textarea class="chat-textarea" placeholder="Type your message"></textarea>
 			<div class="chat-status">Status: <span>Idle</span></div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="ui.js"></script>
 		<script src="http://127.0.0.1:8080/socket.io/socket.io.js"></script>
-
 		<script> 
 		(function() {
+
+			var randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+
 			var getNode = function(s) {
 				return document.querySelector(s);
 			},
@@ -57,8 +78,8 @@
 						for(var i=0; i<data.length; i++) {
 							var message = document.createElement('div');
 							message.setAttribute('class', 'chat-message');
+							message.style.color = data[i].randomColor;
 							message.textContent = data[i].name + ': ' + data[i].message;
-
 							// Append
 							messages.appendChild(message);
 							messages.insertBefore(message, messages.firstchild);
@@ -81,7 +102,8 @@
 					if(event.which === 13 && event.shiftKey ===false) {
 						socket.emit('input', {
 							name: name,
-							message: self.value
+							message: self.value,
+							randomColor: randomColor
 						});
 
 						event.preventDefault();
@@ -90,7 +112,6 @@
 			}
 
 		})();
-		
 		</script>
 		</div>
 	</body>

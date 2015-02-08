@@ -5,7 +5,10 @@ input {
 }
 
 .chat {
-	max-width:300px;
+	position: fixed; 
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
 }
 
 .chat-messages,
@@ -15,17 +18,29 @@ input {
 }
 
 .chat-messages {
-	width:100%;
+	width:800px;
 	height:300px;
 	overflow-y:scroll;
 	padding:10px;
 }
 
 .chat-name {
-	width:100%;
+	width:400px !important;
 	padding:10px;
 	border-bottom:0;
 	margin:0;
+	position: fixed; 
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+#select-class {
+	width:400px !important;
+	position: fixed; 
+  	top: 50%;
+  	left: 120%;
+  	transform: translate(-50%, -50%);
 }
 
 .chat textarea {
